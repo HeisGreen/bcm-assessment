@@ -1,0 +1,76 @@
+/*
+ * BCM Question 4 — one HTML file, one CSS file, no JS.
+ * Breakpoint: 768px — common tablet/portrait split; layout stacks below this width.
+ *
+ * DOM order: A, B, C, D, E, F, G, H (keyboard tab order follows DOM).
+ * Mobile visual order uses grid `order`: A, D, B, C, G (E, F, H hidden).
+ * Screen readers generally follow DOM order, so mobile visual order differs from
+ * reading order unless DOM were reordered (not allowed — no duplicate sections).
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #f4f4f4;
+}
+
+.grid {
+  display: grid;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.cell {
+  background: #fff;
+  border: 2px solid #333;
+  padding: 1rem;
+  min-width: 0;
+}
+
+.cell h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  overflow-wrap: break-word;
+}
+
+.cell-a {
+  background: #e8f0fe;
+}
+
+/* Desktop: 3 columns — row1 A(span2)+B, row2 C+D+E, row3 F+G+H */
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .cell-a {
+    grid-column: span 2;
+  }
+}
+
+/* Mobile: single column; hide E, F, H; visual order A, D, B, C, G */
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cell-a { order: 1; }
+  .cell-d { order: 2; }
+  .cell-b { order: 3; }
+  .cell-c { order: 4; }
+  .cell-g { order: 5; }
+
+  .cell-e,
+  .cell-f,
+  .cell-h {
+    display: none;
+  }
+}

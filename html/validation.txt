@@ -1,0 +1,17 @@
+HTML validation — BCM Question 5
+File: html/index.html
+Checker: W3C Nu Html Checker (validator.w3.org/nu/)
+Date: 2026-10-14
+
+Result: The document validates according to the specified schema(s).
+Schema: HTML + SVG + MathML + RDFa
+Parser: HTML parser
+
+Command used:
+  curl -F "uploaded_files=@html/index.html;type=text/html" -F "out=gnu" https://validator.w3.org/nu/
+
+Notes (not reported as validity errors — documented separately in html/CORRECTIONS.md):
+  - Added lang, charset, viewport, meta description for discoverability
+  - button type="button", img alt, semantic <main>
+  - Original HTML5 errors fixed: body outside html, unquoted attributes, invalid abbr name,
+    mismatched code/b tags, with/height=auto on img
